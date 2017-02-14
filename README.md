@@ -11,6 +11,10 @@ All Rights for the XKCD comics are reserved with their respected owners.
 
 * [Python3+](https://python.org) (used 3.6)
 * [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+* [requests](http://docs.python-requests.org/en/master/)
+* [uuid](https://docs.python.org/3.1/library/uuid.html)
+* [json](https://docs.python.org/3.4/library/json.html)
+* [re](https://docs.python.org/3.1/library/re.html)
 
 ## Usage
 
