@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 chmod +x
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Simple Bot to reply to Telegram messages with XKCD comics
