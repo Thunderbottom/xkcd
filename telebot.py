@@ -91,7 +91,7 @@ def error(bot, update, error):
 def main():
 
     with open('token.txt','r') as token:
-        token_ = token.read() # Add your token to token.txt
+        token_ = token.read().strip('\n') # Add your token to token.txt
     # Create the Updater and pass it your bot's token.
     updater = Updater(token_)
 
