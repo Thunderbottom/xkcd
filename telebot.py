@@ -68,7 +68,7 @@ def inlinequery(bot, update):
     comicTitle = ''
     query = update.inline_query.query
     results = list()
-    if query == '' or ' ':
+    if not query:
         comicTitle = 'Latest comic'
     else:
         comicTitle = 'xkcd:' + str(query)
