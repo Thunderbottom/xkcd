@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Simple Bot to reply to Telegram messages with XKCD comics
@@ -15,6 +15,7 @@ import logging
 from urllib.request import urlopen
 import requests
 import json
+import codecs
 
 # Enable time based logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -37,10 +38,11 @@ def shorten_url(long_url):
 
 
 def getJSON(uri):
+    reader = codecs.getreader("utf-8")
     base = "http://xkcd.com/"
     url = "http://xkcd.com/" + str(uri) + "/info.0.json"
     jsonurl = urlopen(url)
-    jsonStr = json.loads(jsonurl.read())
+    jsonStr = json.load(reader(jsonurl))
     return jsonStr
 
 
@@ -63,11 +65,15 @@ def getTitle(query):
 
 
 def inlinequery(bot, update):
+    comicTitle = ''
     query = update.inline_query.query
     results = list()
-
+    if query == '' or ' ':
+        comicTitle = 'Latest comic'
+    else:
+        comicTitle = 'xkcd:' + str(query)
     results.append(InlineQueryResultArticle(id=uuid4(),
-                                            title='xkcd: ' + query,
+                                            title=comicTitle,
                                             description=getAlt(query),
                                             thumb_url=convertURL(query),
                                             cache_time=15,
@@ -84,7 +90,8 @@ def error(bot, update, error):
 
 def main():
 
-    token_ = '' # Add your token here
+    with open('token.txt','r') as token:
+        token_ = token.read() # Add your token to token.txt
     # Create the Updater and pass it your bot's token.
     updater = Updater(token_)
 
